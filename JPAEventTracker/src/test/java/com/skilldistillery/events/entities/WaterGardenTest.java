@@ -49,7 +49,15 @@ class WaterGardenTest {
 	@DisplayName("testing garden entity mapping")
 	void test1() {
 		assertNotNull(garden);
-		assertEquals("Test", garden.getName());
+		assertEquals("Love Garden", garden.getName());
+		assertEquals("Row 1", garden.getSector());
+		assertEquals("Bush Beans", garden.getVeggie());
+		assertEquals("Daily", garden.getWateringFrequency());
+		assertEquals("2020-06-06", garden.getLastWatered().toString());
+		assertEquals("2020-06-07", garden.getNextWatered().toString());
+		assertEquals(30, garden.getDurationOfWatering());
+		assertEquals("Bush Beans require mostly sun and will not do well under 65 degrees F.", garden.getNotes());
+		
 	}
 
 
