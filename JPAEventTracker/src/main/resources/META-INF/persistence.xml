@@ -8,7 +8,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 
-		<class>com.skilldistillery.events.entities.WaterGarden</class>
+		<class>com.skilldistillery.events.entities.Watergarden</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"

@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WaterGardenTest {
+class WatergardenTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private WaterGarden garden;
+	private Watergarden garden;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -35,7 +35,7 @@ class WaterGardenTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		garden = em.find(WaterGarden.class, 1);
+		garden = em.find(Watergarden.class, 1);
 	}
 
 	@AfterEach

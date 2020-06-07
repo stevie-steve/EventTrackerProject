@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class WaterGarden {
+public class Watergarden {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,11 +35,11 @@ public class WaterGarden {
 
 	private String notes;
 	
-	public WaterGarden() {
+	public Watergarden() {
 		super();
 	}
 
-	public WaterGarden(int id, String name, String sector, String veggie, String wateringFrequency,
+	public Watergarden(int id, String name, String sector, String veggie, String wateringFrequency,
 			LocalDate lastWatered, LocalDate nextWatered, Integer durationOfWatering, String notes) {
 		super();
 		this.id = id;
@@ -128,7 +128,7 @@ public class WaterGarden {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("WaterGarden [id=");
+		builder.append("Watergarden [id=");
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
