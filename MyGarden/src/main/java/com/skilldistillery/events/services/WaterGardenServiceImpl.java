@@ -76,6 +76,7 @@ public class WaterGardenServiceImpl implements WaterGardenService {
 
 	@Override
 	public Boolean delete(int id) {
+		
 		try {
 			wgRepo.deleteById(id);
 			return true;
@@ -85,6 +86,5 @@ public class WaterGardenServiceImpl implements WaterGardenService {
 		}
 
 	}
-
-
+	
 }

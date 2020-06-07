@@ -37,7 +37,7 @@ public class WaterGardenController {
 	// C
 	@PostMapping("watering")
 	public Watergarden create(
-			@PathVariable Watergarden wg,
+			@RequestBody Watergarden wg,
 			HttpServletResponse response, HttpServletRequest request) {
 
 		wg = wgSrv.create(wg);
@@ -89,7 +89,7 @@ public class WaterGardenController {
 	
 
 	// D
-	@DeleteMapping("watering/{Id}")
+	@DeleteMapping("watering/{id}")
 	public void deletePost(
 			@PathVariable Integer id, 
 			HttpServletResponse response) {
