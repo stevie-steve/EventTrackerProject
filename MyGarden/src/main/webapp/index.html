@@ -3,13 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <title>My Garden</title>
+<style>
+  table tbody tr:hover { background-color: #B0E2FF; }
+  </style>
 <script type = "text/javascript" src="js/script.js"></script>
 </head>
 <body>
 <h1> My Garden</h1>
 
+
+<form name="search">
+  <input type = "number" name = "id">
+  <button name="lookFor">Look For a Watering</button>
+</form>
+
+<div id = "wateringData"></div>
 <div id="output">
 <div id ="AllGardenWatering"></div>
+
+
+    <h3>Add a new Veggie to the Garden</h3>
+    <form name="createForm">
+      <label for="name">Garden Name</label>
+      <input type="text" id="name" name="name" />
+      <br /><br />
+      <label for="sector">Garden Sector</label>
+      <input type="text" id="sector" name="sector" />
+      <br /><br />
+      <label for="veggie">Veggie Type</label>
+      <input type="text" id="veggie" name="veggie" />
+      <br /><br />
+      <label for="wateringFrequency">Watering Frequency(In Days)</label>
+      <input type="text" id="wateringFrequency" name="wateringFrequency" />
+      <br /><br />
+      <label for="lastWatered">Date Last Watered</label>
+      <input type="date" id="lastWatered" name="lastWatered" />
+      <br /><br />
+      <label for="nextWatered">Date to Water Next</label>
+      <input type="date" id="nextWatered" name="nextWatered" />
+      <br /><br />
+      <label for="durationOfWatering">Duration of Watering(miniutes)</label>
+      <input type="text" id="durationOfWatering" name="durationOfWatering" />
+      <br /><br />
+      <label for="notes">Notes</label>
+      <input type="text" id="notes" name="notes" />
+      <br /><br />
+     <input type="submit" name="addWatering" value="Submit" />
+    </form>
+
+
 <div id ="garden details or something"></div>
 <div id ="gardenedit"></div>
 </div>

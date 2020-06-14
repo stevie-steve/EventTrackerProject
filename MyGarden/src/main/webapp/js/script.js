@@ -7,9 +7,23 @@ window.addEventListener('load', function(){
 
 function init(){
 	console.log('script.js loaded, YEAAAAHHHH BABY');
-	//TODO everything.
-	//this function will call to get all waterings
+
 	loadGardenList();
+
+	document.search.lookFor.addEventListener('click', function(e){
+		e.preventDefault();
+
+		var wateringId = document.search.id.value;
+			if (!isNaN(wateringId) && wateringId>0){
+				getSingleWatering(wateringId);
+			}
+	})
+
+	document.createForm.addWatering.addEventListener('click', function(event){
+		event.preventDefault();
+		createWatering();
+	});
+
 }
 
 
@@ -30,19 +44,12 @@ let xhr = new XMLHttpRequest();
 			else {
 				console.error('error: ' + xhr.status)
 			}
-
-		
 		
 		}
 		//xhr.send();
 	}
 	xhr.send();
 }
-//xhr.send();
-
-
-
-
 
 
 
@@ -53,10 +60,8 @@ function printWaterings(water) {
 	console.log(water);
 
 	let table = document.createElement('table');
-	table.className = 'table table-striped';  // chamnge 
 	
 	let tableHead = document.createElement('thead');
-	tableHead.className = 'thead-dark';   // chamnge 
 	
 	let tr = document.createElement('tr');
 	
@@ -91,14 +96,6 @@ function printWaterings(water) {
 	th7 = document.createElement('th');
 	th7.textContent = 'Notes';
 	tr.appendChild(th7);
-
-	th8 = document.createElement('th');
-	th8.textContent = 'Update';
-	tr.appendChild(th8);
-
-	th9 = document.createElement('th');
-	th9.textContent = 'Delete';
-	tr.appendChild(th9);
 
 
 	tableHead.appendChild(tr);	
@@ -142,36 +139,128 @@ function printWaterings(water) {
 		td7.textContent = element.notes;
 		tr1.appendChild(td7);
 
-		td8 = document.createElement('td')	
-			//BUTTON TO UPDATE WATERING FORM 
-			let updateBtn = document.createElement('button');
-			updateBtn.name = 'updateBtn';
-			updateBtn.id = 'updateBtn';
-			updateBtn.className = 'btn btn-secondary';
-			updateBtn.textContent = 'UPDATE';
-			td8.appendChild(updateBtn);
-			updateBtn.addEventListener('click', function(){
-				showWateringUpdateForm(element);
-			});
-		tr1.appendChild(td8);
-
-		td9 = document.createElement('td')	
-			//BUTTON TO UPDATE WATERING FORM 
-			let deleteBtn = document.createElement('button');
-			deleteBtn.name = 'deleteBtn';
-			deleteBtn.id = 'deleteBtn';
-			deleteBtn.className = 'btn btn-secondary';
-			deleteBtn.textContent = 'DELETE';
-			td9.appendChild(deleteBtn);
-			deleteBtn.addEventListener('click', function(){
-				deleteWatering(element.id);
-			});
-		tr1.appendChild(td9);
-
 		tableBody.appendChild(tr1);
 
-		
 	});
 	table.appendChild(tableBody);
 	dataDiv.appendChild(table);
 }
+
+
+// create 
+function createWatering(){
+	let newWaterDiv= document.createForm;
+	let water = {};
+	water.name = newWaterDiv.name.value;
+	water.sector = newWaterDiv.sector.value;
+	water.veggie = newWaterDiv.veggie.value;
+	water.wateringFrequency = newWaterDiv.wateringFrequency.value;
+	water.lastWatered = newWaterDiv.lastWatered.value;
+	water.nextWatered = newWaterDiv.nextWatered.value;
+	water.durationOfWatering = newWaterDiv.durationOfWatering.value;
+	water.notes = newWaterDiv.notes.value;
+
+	let waterJson = JSON.stringify(water); 
+	let xhr = new XMLHttpRequest();
+	xhr.open('POST', 'api/watering');
+		xhr.setRequestHeader('Content-type', 'application/json')
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState === 4){
+				if(xhr.status === 200 || xhr.status === 201){
+					let createdWatering = JSON.parse(xhr.responseText);
+					loadGardenList();
+				}
+				else{
+					if(xhr.status === 400){
+						displayError(`Invalid watering data, unable to create watering form ${waterJson}`);
+					} else{
+						displayError('Unknown error creating log.')
+					}
+				}
+			}
+	};
+	xhr.send(waterJson);
+	}
+
+	function getSingleWatering(id) {
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', 'api/watering/' + id);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState === 4){
+				if(xhr.status === 200){
+					let dataJSON = xhr.responseText; 
+					let data = JSON.parse(dataJSON); 
+					console.log(data);
+					showWatering(data);
+				}else {
+					if (xhr.status === 404) {		
+						let dataDiv = document.getElementById('wateringData');
+						dataDiv.textContent = '';	
+						displayError('Record not found');
+					}
+					else {
+						displayError('Error retrieving watering ' + id);
+					}
+				} 
+			};
+		}
+		xhr.send(null);
+	}
+	function showWatering(watering){ 
+		//let ErrorDiv = document.getElementById('ErrorData');
+		//	ErrorDiv.textContent = '';
+
+		var dataDiv = document.getElementById('wateringData');
+		dataDiv.textContent = '';
+		
+		let name = document.createElement("h1");
+			name.textContent = 'Garden Name: ' + watering.name;
+		 	dataDiv.appendChild(name);
+
+		let sector = document.createElement('blockquote');
+	 		sector.textContent = 'Garden Sector: ' + watering.sector;
+			dataDiv.appendChild(sector);
+			  
+		let veggie = document.createElement('blockquote');
+			veggie.textContent = 'Veggie Name: ' + watering.veggie;
+			dataDiv.appendChild(veggie);
+
+		let waterFrequency = document.createElement('blockquote');
+			waterFrequency.textContent = 'Watering Frequency: ' + watering.waterFrequency;
+			dataDiv.appendChild(waterFrequency);
+			  
+		let lastWatered = document.createElement('blockquote');
+			lastWatered.textContent = 'Last Watered (date): ' + watering.lastWatered;
+			dataDiv.appendChild(lastWatered);
+			  
+		let nextWatered = document.createElement('blockquote');
+			nextWatered.textContent = 'Next watering (date): ' + watering.nextWatered;
+			dataDiv.appendChild(nextWatered);
+			  
+		let duration = document.createElement('blockquote');
+			duration.textContent = 'Watering Duration(minutes): ' + watering.duration;
+			dataDiv.appendChild(duration);
+
+		let notes = document.createElement('blockquote');
+			notes.textContent = 'Notes: ' + watering.notes;
+			dataDiv.appendChild(notes);	
+			
+			 	let updateBtn = document.createElement('button');
+			 	updateBtn.name = 'updateBtn';
+			 	updateBtn.id = 'updateBtn';
+			 	updateBtn.textContent = 'UPDATE';
+			 	dataDiv.appendChild(updateBtn);
+			 	updateBtn.addEventListener('click', function(){
+			 		showWateringUpdateForm(element);
+			 	});
+
+		 	let deleteBtn = document.createElement('button');
+		 	deleteBtn.name = 'deleteBtn';
+		 	deleteBtn.id = 'deleteBtn';
+		 	deleteBtn.textContent = 'DELETE';
+		 	dataDiv.appendChild(deleteBtn);
+		 	deleteBtn.addEventListener('click', function(){
+				 deleteWatering(element.id);
+				});
+				
+	}
