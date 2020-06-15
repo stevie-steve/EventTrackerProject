@@ -64,38 +64,42 @@ function printWaterings(water) {
 	let tableHead = document.createElement('thead');
 	
 	let tr = document.createElement('tr');
-	
+
 	let th = document.createElement('th')	
-	th.textContent = 'Garden Name';
+	th.textContent = 'Watering ID';
 	tr.appendChild(th);
 
-	th1 = document.createElement('th');
-	th1.textContent = 'Garden Sector';
+	let th1 = document.createElement('th')	
+	th1.textContent = 'Garden Name';
 	tr.appendChild(th1);
 
 	th2 = document.createElement('th');
-	th2.textContent = 'Veggie Name';
+	th2.textContent = 'Garden Sector';
 	tr.appendChild(th2);
 
 	th3 = document.createElement('th');
-	th3.textContent = 'Watering Frequency';
+	th3.textContent = 'Veggie Name';
 	tr.appendChild(th3);
 
 	th4 = document.createElement('th');
-	th4.textContent = 'Last Watering Date';
+	th4.textContent = 'Watering Frequency';
 	tr.appendChild(th4);
 
 	th5 = document.createElement('th');
-	th5.textContent = 'Next Watering Date';
+	th5.textContent = 'Last Watering Date';
 	tr.appendChild(th5);
 
 	th6 = document.createElement('th');
-	th6.textContent = 'Duration of Watering';
+	th6.textContent = 'Next Watering Date';
 	tr.appendChild(th6);
 
 	th7 = document.createElement('th');
-	th7.textContent = 'Notes';
+	th7.textContent = 'Duration of Watering';
 	tr.appendChild(th7);
+
+	th8 = document.createElement('th');
+	th8.textContent = 'Notes';
+	tr.appendChild(th8);
 
 
 	tableHead.appendChild(tr);	
@@ -108,39 +112,47 @@ function printWaterings(water) {
 		tr1 = document.createElement('tr');
 
 		td = document.createElement('td')	
-		td.textContent = element.name;
+		td.textContent = element.id;
 		tr1.appendChild(td);
-		
+
 		td1 = document.createElement('td')	
-		td1.textContent = element.sector;
+		td1.textContent = element.name;
 		tr1.appendChild(td1);
 		
 		td2 = document.createElement('td')	
-		td2.textContent = element.veggie;
+		td2.textContent = element.sector;
 		tr1.appendChild(td2);
 		
 		td3 = document.createElement('td')	
-		td3.textContent = element.wateringFrequency;
+		td3.textContent = element.veggie;
 		tr1.appendChild(td3);
 		
 		td4 = document.createElement('td')	
-		td4.textContent = element.lastWatered;
+		td4.textContent = element.wateringFrequency;
 		tr1.appendChild(td4);
-	
+		
 		td5 = document.createElement('td')	
-		td5.textContent = element.nextWatered;
+		td5.textContent = element.lastWatered;
 		tr1.appendChild(td5);
-
+	
 		td6 = document.createElement('td')	
-		td6.textContent = element.durationOfWatering;
+		td6.textContent = element.nextWatered;
 		tr1.appendChild(td6);
 
 		td7 = document.createElement('td')	
-		td7.textContent = element.notes;
+		td7.textContent = element.durationOfWatering;
 		tr1.appendChild(td7);
+
+		td8 = document.createElement('td')	
+		td8.textContent = element.notes;
+		tr1.appendChild(td8);
 
 		tableBody.appendChild(tr1);
 
+		tr1.addEventListener('click', function (e){
+			e.preventDefault();
+			getSingleWatering(element.id);
+		})
 	});
 	table.appendChild(tableBody);
 	dataDiv.appendChild(table);
@@ -178,9 +190,10 @@ function createWatering(){
 					}
 				}
 			}
-	};
+		};
 	xhr.send(waterJson);
-	}
+	
+}
 
 	function getSingleWatering(id) {
 		let xhr = new XMLHttpRequest();
@@ -210,10 +223,65 @@ function createWatering(){
 		//let ErrorDiv = document.getElementById('ErrorData');
 		//	ErrorDiv.textContent = '';
 
+		// var singleTable = document.createElement('table')
+		// var singleForm = document.createElement('createForm');
+
+		//if (watering === null){
+		// 	dataDiv.appendChild(singleTable);
+		// 	singleTable.textContent('No watering created');
+		// }else{
+		// 	dataDiv.appendChild(singleTable)
+		// }
+		// }
+
+		// let header = document.createElement('tHead')
+		// singleTable.appendChild(header);
+		// let headerRow = document.createElement("tr");
+		//   header.appendChild(headerRow);
+		//   let headerArray = ['id', 'name', 'sector', 'veggie', 'wateringFrequency', 'lastWatered', 'nextWatered', 'durationOfWatering', 'notes'];
+
+		// for (let index = 0; index < headerArray.length; index++) {
+		// 	  let column = document.createElement('th');
+		// 	  column.textContent= headerArray[i];
+		// 	  headerRow.appendChild(column);
+		// }
+		// let body = document.createElement('tbody');
+		// singleTable.appendChild(body);
+		// let tableRow = document.createElement('tr');
+		// body.appendChild(tableRow);
+		// let figures = Object.values(watering);
+		// for (let figure of figures) {
+		//   let column = document.createElement("td");
+		//   column.textContent = figure;
+		//   console.log(figure);
+		//   tableRow.appendChild(column);
+			  
+		//   var editBtn = document.createElement("input");
+  		// 	editBtn.value = "Edit";
+		// 	  editBtn.type = "submit";
+			  
+  		// 	var deleteBtn = document.createElement("input");
+  		// 	deleteBtn.value = "Delete";
+ 		// 	deleteBtn.type = "submit";
+
+  		// 	var editColumn = document.createElement("td");
+  		// 	var deleteColumn = document.createElement("td");
+ 
+ 		// 	 backColumn.appendChild(editBtn);
+ 		// 	 backColumn.appendChild(deleteBtn);
+
+ 		// 	 tableRow.appendChild(editColumn);
+ 		// 	 tableRow.appendChild(deleteColumn);
+ 
+ // }); 
+
+
+
+
 		var dataDiv = document.getElementById('wateringData');
 		dataDiv.textContent = '';
 		
-		let name = document.createElement("h1");
+		let name = document.createElement("blockquote");
 			name.textContent = 'Garden Name: ' + watering.name;
 		 	dataDiv.appendChild(name);
 
@@ -251,7 +319,7 @@ function createWatering(){
 			 	updateBtn.textContent = 'UPDATE';
 			 	dataDiv.appendChild(updateBtn);
 			 	updateBtn.addEventListener('click', function(){
-			 		showWateringUpdateForm(element);
+			 		updateWatering(element);
 			 	});
 
 		 	let deleteBtn = document.createElement('button');
@@ -260,7 +328,167 @@ function createWatering(){
 		 	deleteBtn.textContent = 'DELETE';
 		 	dataDiv.appendChild(deleteBtn);
 		 	deleteBtn.addEventListener('click', function(){
-				 deleteWatering(element.id);
+				 deleteWatering(watering.id);
 				});
 				
 	}
+	var updateWatering = function () {
+		var xhr = new XMLHttpRequest();
+		xhr.open("DELETE", "api/watering/" + id);
+	}
+
+
+
+
+
+	var deleteWatering = function (id) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("DELETE", "api/watering/" + id);
+	//	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
+		xhr.onreadystatechange = function () {
+		  if (xhr.readyState === 4) {
+			if (xhr.status == 200 || xhr.status == 204) {
+			  loadGardenList();
+			  var dataDiv = document.getElementById('wateringData');
+			  dataDiv.textContent= '';
+			} else {
+			  console.log("DELETE request failed.");
+			  console.error(xhr.status + ": " + xhr.responseText);
+			}
+		  }
+		};
+		xhr.send();
+	  };
+
+
+
+
+	  	function showWatering1(watering){ 
+		let dataDiv = document.getElementById('wateringData1');
+		dataDiv.textContent = '';
+	
+		console.log(watering);
+	
+		let table = document.createElement('table');
+		
+		let tableHead = document.createElement('thead');
+		
+		let tr = document.createElement('tr');
+	
+		let th = document.createElement('th')	
+		th.textContent = 'Watering ID';
+		tr.appendChild(th);
+	
+		let th1 = document.createElement('th')	
+		th1.textContent = 'Garden Name';
+		tr.appendChild(th1);
+	
+		th2 = document.createElement('th');
+		th2.textContent = 'Garden Sector';
+		tr.appendChild(th2);
+	
+		th3 = document.createElement('th');
+		th3.textContent = 'Veggie Name';
+		tr.appendChild(th3);
+	
+		th4 = document.createElement('th');
+		th4.textContent = 'Watering Frequency';
+		tr.appendChild(th4);
+	
+		th5 = document.createElement('th');
+		th5.textContent = 'Last Watering Date';
+		tr.appendChild(th5);
+	
+		th6 = document.createElement('th');
+		th6.textContent = 'Next Watering Date';
+		tr.appendChild(th6);
+	
+		th7 = document.createElement('th');
+		th7.textContent = 'Duration of Watering';
+		tr.appendChild(th7);
+	
+		th8 = document.createElement('th');
+		th8.textContent = 'Notes';
+		tr.appendChild(th8);
+
+		th9 = document.createElement('th');
+		th9.textContent = 'update';
+		tr.appendChild(th9);
+
+		th10 = document.createElement('th');
+		th10.textContent = 'delete';
+		tr.appendChild(th10);
+	
+	
+		tableHead.appendChild(tr);	
+		table.appendChild(tableHead);
+	
+		let tableBody = document.createElement('tbody');
+	
+		watering.forEach(element => {
+			console.log(element);
+			tr1 = document.createElement('tr');
+	
+			td = document.createElement('td')	
+			td.textContent = element.id;
+			tr1.appendChild(td);
+	
+			td1 = document.createElement('td')	
+			td1.textContent = element.name;
+			tr1.appendChild(td1);
+			
+			td2 = document.createElement('td')	
+			td2.textContent = element.sector;
+			tr1.appendChild(td2);
+			
+			td3 = document.createElement('td')	
+			td3.textContent = element.veggie;
+			tr1.appendChild(td3);
+			
+			td4 = document.createElement('td')	
+			td4.textContent = element.wateringFrequency;
+			tr1.appendChild(td4);
+			
+			td5 = document.createElement('td')	
+			td5.textContent = element.lastWatered;
+			tr1.appendChild(td5);
+		
+			td6 = document.createElement('td')	
+			td6.textContent = element.nextWatered;
+			tr1.appendChild(td6);
+	
+			td7 = document.createElement('td')	
+			td7.textContent = element.durationOfWatering;
+			tr1.appendChild(td7);
+	
+			td8 = document.createElement('td')	
+			td8.textContent = element.notes;
+			tr1.appendChild(td8);
+	
+			td9 = document.createElement('td')	
+			let updateBtn = document.createElement('button');
+			updateBtn.name = 'updateBtn';
+			updateBtn.id = 'updateBtn';
+			updateBtn.textContent = 'UPDATE';
+			td9.dataDiv.appendChild(updateBtn);
+			updateBtn.addEventListener('click', function(){
+				updateWatering(element);
+			});
+
+			td10 = document.createElement('td')	
+			let deleteBtn = document.createElement('button');
+			deleteBtn.name = 'deleteBtn';
+			deleteBtn.id = 'deleteBtn';
+			deleteBtn.textContent = 'DELETE';
+			td10.dataDiv.appendChild(deleteBtn);
+			deleteBtn.addEventListener('click', function(){
+			deleteWatering(watering.id);
+		   });
+
+		tr1.appendChild(td6);
+
+		tableBody.appendChild(tr1);
+		});
+		table.appendChild(tableBody);
+		dataDiv.appendChild(table);
+	};
