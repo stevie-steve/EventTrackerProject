@@ -20,6 +20,7 @@ The Watergarden App is made for the involved gardener.  Each plant has its own s
 * Spring Data JPA
 * Git/Github
 * Postman
+* Angular
 
 ## Objectives
 * Created a JPA Project
@@ -29,5 +30,6 @@ The Watergarden App is made for the involved gardener.  Each plant has its own s
 * Used Spring REST annotations.
 * Used Spring Data JPA to perform all CRUD operations.
 * Practiced sending and receiving JSON.
+* 
 
 ## Lessons Learned
