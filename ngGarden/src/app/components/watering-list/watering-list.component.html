@@ -1,32 +1,62 @@
-<form *ngIf="!selected && !editWatering">
-  <h2>New Watering Form</h2><br>
+<div class="jumbotron"><h1>Garden Watering App</h1></div>
+
+<div class="well well-lg" *ngIf="!selected && !editWatering"><h2>New Watering Form</h2></div>
+<form class="form-inline" *ngIf="!selected && !editWatering">
+  <div class="form-group">
+  <br>
   <!-- <input type="hidden" name="id" placeholder="Watering ID" [(ngModel)]="newWatering.id"><br> -->
+  <label for="name">Garden Name:</label><br>
   <input type="text" name="name" placeholder="Garden Name" [(ngModel)]="newWatering.name"><br>
+</div>
+  <div class="form-group">
+    <label for="  sector">Sector:</label><br>
   <input type="text" name="sector" placeholder="Sector" [(ngModel)]="newWatering.sector"><br>
+</div>
+  <div class="form-group">
+    <label for="veggie">Veggie:</label><br>
   <input type="text" name="veggie" placeholder="Veggie" [(ngModel)]="newWatering.veggie"><br>
+  </div>
+  <div class="form-group">
+    <label for="wateringFrequency">   Watering Frequency:</label><br>
   <input type="text" name="wateringFrequency" placeholder="Watering Frequency" [(ngModel)]="newWatering.wateringFrequency"><br>
+</div>
+<div class="form-group">
+  <label for="lastWatered">   Date Last Watered:</label><br>
   <input type="date" name="lastWatered" placeholder="Date Last Watered" [(ngModel)]="newWatering.lastWatered"><br>
+</div>
+<div class="form-group">
+  <label for="nextWatered">   Date Next Watering:</label><br>
   <input type="date" name="nextWatered" placeholder="Date of Next Watering" [(ngModel)]="newWatering.nextWatered"><br>
+</div>
+<div class="form-group">
+  <label for="durationOfWatering">Duration of Watering(mins):</label><br>
   <input type="number" name="durationOfWatering" placeholder="Duration of Watering(mins)" [(ngModel)]="newWatering.durationOfWatering"><br>
-  <input type="text" name="notes" placeholder="Notes" [(ngModel)]="newWatering.notes"><br>
-  <button (click)="create()">Create New Watering</button>
- </form>
+</div>
+<div class="form-group">
+  <label for="notes">Notes:</label><br>
+  <input type="text" name="notes" placeholder="Notes" [(ngModel)]="newWatering.notes"><br><br>
+</div>
+<div class="form-group">
+  <button class="btn btn-info"(click)="create()">Create New Watering</button>
+ </div>
+
+</form>
   <br>
   <br>
 
-  <h2>List Of Watering Events</h2>
-  <table *ngIf="!selected">
-    <thead>
+  <div *ngIf="!selected"><h2>List Of Watering Events</h2></div>
+  <table class="table table-sm table-hover table-bordered" *ngIf="!selected">
+    <thead class="thead-dark">
     <tr>
-      <td>ID </td>
-      <td>Garden Name </td>
-      <td>Sector</td>
-      <td>Veggie</td>
-      <td>Watering Frequency</td>
-      <td>Date Last Watered</td>
-      <td>Date Next Watering </td>
-      <td>Duration of Watering(mins)</td>
-      <td>Notes</td>
+      <th>ID </th>
+      <th>Garden Name </th>
+      <th>Sector</th>
+      <th>Veggie</th>
+      <th>Watering Frequency</th>
+      <th>Date Last Watered</th>
+      <th>Date Next Watering </th>
+      <th>Duration of Watering(mins)</th>
+      <th>Notes</th>
 
     </tr>
   </thead>
@@ -50,6 +80,7 @@
   </table>
 
   <div *ngIf="selected && !editWatering">
+    <h2>Selected Watering</h2>
     <p>ID: {{ selected.id}}</p>
     <p>Garden Name: {{ selected.name}}</p>
     <p>Sector: {{ selected.sector}}</p>
@@ -62,9 +93,9 @@
     <!-- <p>Height: {{selected.height | number:'1.1'}}</p>
     <p>Weight: {{selected.weight | number:'1.1'}}</p> -->
 
-    <td><button (click)="edit(selected)">Update</button></td>
-    <button (click)="destroy(selected.id)">Remove Watering</button>
-    <button (click)="showTable()">Go Back To Table</button>
+    <button class="btn btn-success"(click)="edit(selected)">Update</button>
+    <button class="btn btn-danger"(click)="destroy(selected.id)">Remove Watering</button>
+    <button class="btn btn-info"(click)="showTable()">Go Back To Table</button>
   </div>
 
 
@@ -77,6 +108,7 @@
       <input type="date" name="lastWatered" placeholder="Date Last Watered" [(ngModel)]="editWatering.lastWatered"><br>
       <input type="date" name="nextWatered" placeholder="Date of Next Watering" [(ngModel)]="editWatering.nextWatered"><br>
       <input type="number" name="durationOfWatering" placeholder="Duration of Watering(mins)" [(ngModel)]="editWatering.durationOfWatering"><br>
-      <input type="text" name="notes" placeholder="Notes" [(ngModel)]="editWatering.notes"><br>
-      <button (click)="update(editWatering)">Update</button>
+      <input type="text" name="notes" placeholder="Notes" [(ngModel)]="editWatering.notes"><br><br>
+      <button class="btn btn-success"(click)="update(editWatering)">Update</button>
+      <button class="btn btn-info"(click)="showTable()">Go Back To Table</button>
     </form>
