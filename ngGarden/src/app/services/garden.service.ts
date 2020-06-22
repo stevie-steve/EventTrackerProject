@@ -3,14 +3,15 @@ import { Watering } from '../models/watering';
 import { HttpClient } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GardenService {
 
-  private baseUrl = 'http://localhost:8084/';
-  private url = this.baseUrl + 'api/watering';
+  // private baseUrl = 'http://localhost:8084/';
+  private url = environment.baseUrl + 'api/watering';
 
   constructor(private http: HttpClient)
   { }
